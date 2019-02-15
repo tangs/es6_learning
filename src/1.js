@@ -35,5 +35,13 @@
         }
         func2();
     }
-    // func2();
+    // if (true)
+    //     const func3 = () => {
+    //         console.log("func2:1");
+    //     }
+    const foo = Object.freeze({a: 1, b: 2});
+    foo.a = 3;
+    console.log(`a:${foo.a}`);
 }
+// var a = 33;
+// console.log(`a:${this.a}`);
