@@ -29,3 +29,8 @@
     const [x = 1, y = 2] = [undefined, null];
     console.log(`x:${x}, y:${y}`);
 }
+
+{
+    const [x, ...y] = [1, 2, 3, 4];
+    console.log(`y:${y}, typeof:${typeof y}`);
+}
