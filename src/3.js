@@ -34,3 +34,12 @@
     const [x, ...y] = [1, 2, 3, 4];
     console.log(`y:${y}, typeof:${typeof y}`);
 }
+
+{
+    const f = function() {
+        console.log("1");
+    };
+    console.log("2");
+    let [x = f()] = [1];
+    console.log("3");
+}
