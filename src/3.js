@@ -138,3 +138,20 @@
     const num = [[1, 2], [3, 4]].map(([a, b]) => a * b);
     console.log(num);
 }
+
+{
+    [(b)] = [3];
+    {
+        const b = 33;
+    }
+    console.log(b);
+}
+
+{
+    const obj = new Map();
+    obj.set('a', 1);
+    obj.set('b', '333');
+    for (const [k, v] of obj) {
+        console.log(k, v);
+    }
+}
