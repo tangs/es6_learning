@@ -81,3 +81,48 @@
     console.log(start);
     console.log(line);
 }
+
+{
+    const obj = {};
+    const arr = [];
+    ({foo: obj.prop, bar: arr[0]} = {foo: 123, bar: true});
+    // {prop: 123}
+    console.log(obj);
+    // [true]
+    console.log(arr);
+}
+
+{
+    const func = () => {
+        console.log('call func.');
+        return 111;
+    }
+    const obj = {
+        a: 1,
+        b: '2'
+    };
+    const {a = 100, b = func(), c = 300, d = func()} = obj;
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log(d);
+}
+
+{
+    const arr = [
+        1,
+        2
+    ];
+    const {0: a, 1: b, 2: c} = arr;
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+
+{
+    const {0: a, 1: b, 2: c, length: l} = 'adc';
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log(l);
+}
