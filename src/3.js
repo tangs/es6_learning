@@ -43,3 +43,41 @@
     let [x = f()] = [1];
     console.log("3");
 }
+
+{
+    const p = {
+        a: 1,
+        b: 2,
+        c: 3
+    };
+    const {a, b, c: e, d} = p;
+    console.log(`a:${a}, b:${b}, e:${e}, d:${d}`);
+}
+
+{
+    const obj = {
+        p: [
+            'Hello',
+            {y: 'World'}
+        ]
+    };
+    const {p, p: [x, {y}]} = obj;
+    console.log(p);
+    console.log(x);
+    console.log(y);
+}
+
+{
+    const obj = {
+        loc: {
+            start: {
+                line: 1,
+                column: 5
+            }
+        }
+    };
+    const {loc, loc: {start}, loc: {start: {line}}} = obj;
+    console.log(loc);
+    console.log(start);
+    console.log(line);
+}
