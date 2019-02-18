@@ -126,3 +126,15 @@
     console.log(c);
     console.log(l);
 }
+
+{
+    const num = 123;
+    const {toString: s} = num;
+    console.log(s.call(num));
+    console.log(s === Number.prototype.toString);
+}
+
+{
+    const num = [[1, 2], [3, 4]].map(([a, b]) => a * b);
+    console.log(num);
+}
