@@ -78,3 +78,11 @@
     console.log(s1);
     console.log(s2);
 }
+
+{
+    const rex = /a(b)(?<name>c)\1\k<name>/;
+    console.log(rex.test('abc'));
+    console.log(rex.test('abcbc'));
+    console.log(rex.test('abcb'));
+    console.log(rex.test('abcc'));
+}
