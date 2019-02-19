@@ -86,3 +86,7 @@
     console.log(rex.test('abcb'));
     console.log(rex.test('abcc'));
 }
+
+{
+    const rex = /\w/;
+}
