@@ -146,6 +146,7 @@ line 2.`)
     const msg1 = passthru1`The total is ${num} (${num*1.05} with tax)`;
     console.log(msg);
     console.log(msg1);
+    console.log`123\n`
 }
 
 {
@@ -199,4 +200,9 @@ line 2.`)
     // console.log(typeof pars);
     const [...pars] = [1, 2, 3];
     fun(pars);
+}
+
+{
+    const str = String.raw`Hi\n${3}\u000A`;
+    console.log(str);
 }
