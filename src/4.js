@@ -4,10 +4,10 @@
 }
 {
     let hello = 123;
-    hell\u{6F} = 33;
-    console.log(hello);
-    hello = 125;
-    console.log(hell\u{6F});
+    // hell\u{6F} = 33;
+    // console.log(hello);
+    // hello = 125;
+    // console.log(hell\u{6F});
 }
 
 {
@@ -99,4 +99,104 @@ line 2.`)
     const parse = eval(script);
     const txt = parse({supplies: ['tangs', 'kaka', 'Rivaldo', 'Ronaldo']});
     console.log(txt);
+}
+
+{
+    const func = (...pars) => {
+        // for (let par of pars) {
+        //     console.log(par, typeof `par`);
+        // }
+        // console.log('\n');
+        console.log(pars);
+    };
+    func`Hello world`;
+    func`123`;
+    const num = 100;
+    func`${num}`;
+    func`Hello ${num} World ${num*num}`;
+
+    function passthru(literals) {
+        let result = '';
+        let i = 0;
+        while (i < literals.length) {
+            result += literals[i++];
+            if (i < arguments.length) {
+                result += arguments[i];
+            }
+        }
+        return result;
+    }
+
+    function passthru1(literals, ...values) {
+        let result = '';
+        for (let i = 0; i < values.length; ++i) {
+            result += literals[i] + values[i];
+        }
+        if (literals.length > 0) {
+            result += literals[literals.length - 1];
+        }
+        return result;
+    }
+    // [['The total is ', ' (', ' with tax)'], 100, 105]
+    func`The total is ${num} (${num*1.05} with tax)`;
+    // literals: ['The total is ', ' (', ' with tax)']
+    // arguments: [['The total is ', ' (', ' with tax)'], 100, 105]
+    // msg: The total is 100 (105 with tax)
+    const msg = passthru`The total is ${num} (${num*1.05} with tax)`;
+    const msg1 = passthru1`The total is ${num} (${num*1.05} with tax)`;
+    console.log(msg);
+    console.log(msg1);
+}
+
+{
+    func1();
+    console.log(typeof func1);
+    console.log(typeof func2);
+    // console.log(typeof func3);
+    console.log(typeof func4);
+    // console.log(typeof func5);
+
+
+    function func1() {
+        console.log('call func1.')
+    }
+    var func2 = function () {
+        console.log('call func2.')
+    }
+    let func3 = function () {
+        console.log('call func3.')
+    }
+    var func4 = () => {
+        console.log('call func4.')
+    }
+    let func5 = () => {
+        console.log('call func5.')
+    }
+
+    {
+        func1();
+        function func1() {
+            console.log('call func1.1')
+        }
+        let func3 = function () {
+            console.log('call func3.1')
+        }
+        func3();
+    }
+    func1();
+    func3();
+}
+
+{
+    function fun(...pars) {
+        for (let par of pars) {
+            console.log(par);
+        }
+    }
+    fun([1, 2, 3]);
+    fun.call(this, [1, 2, 3]);
+    fun.apply(this, [1, 2, 3]);
+    // console.log(typeof pars);
+    const [...pars] = [1, 2, 3];
+    fun(pars);
 }
