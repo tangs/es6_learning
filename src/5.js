@@ -89,4 +89,9 @@
 
 {
     const rex = /\w/;
+    const s = 'abc def gg_d';
+    // const matchs = s.matchAll(rex);
+    // for (const match of matchs) {
+    //     console.log(match);
+    // }
 }
