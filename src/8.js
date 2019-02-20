@@ -21,5 +21,16 @@
     for (let ch of 'abcdefg') {
         console.log(ch);
     }
+    console.log(typeof [...234]);
     Number.prototype[Symbol.iterator] = old;
+}
+
+{
+    console.log([1, 2, 3, 4].find(n => n < 3));
+    console.log([1, 2, 3, 4].findIndex(n => n < 3 && n > 1));
+}
+
+{
+    console.log([1, [2, [3, 4]]]);
+    const arr = [1, [2, 3, 4, [5, 6]]];
 }
