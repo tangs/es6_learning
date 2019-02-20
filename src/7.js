@@ -50,5 +50,31 @@
 {
     const fun = a => a*a;
     console.log(fun.name);
+    console.log(new Function());
+    console.log(fun.bind(this).name);
     console.log(eval(`${fun.name}(4)`));
+}
+
+{
+    const fun = (x) => void x++;
+    console.log(fun(3));
+}
+
+// {
+//     const a = 3;
+//     function func() {
+//         return this.a;
+//     }
+//     const b = {a: 5};
+//     b::func();
+// }
+
+{
+    const fib = (n, num1 = 1, num2 = 1) => {
+        if (n <= 1) return num2;
+        return fib(n - 1, num2, num1 + num2);
+    }
+    console.log(fib(1));
+    console.log(fib(100));
+    console.log(fib(1000));
 }
