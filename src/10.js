@@ -45,6 +45,29 @@
 }
 
 {
+    const symbol = Symbol.for('111');
     console.log(Symbol.keyFor(Symbol('1')));
     console.log(Symbol.keyFor(Symbol.for('1')));
+    console.log(Symbol.keyFor(symbol));
+}
+
+{
+    class MySplitter {
+        constructor(value) {
+            this.value = value;
+        }
+        [Symbol.split](string) {
+            let index = string.indexOf(this.value);
+            if (index === -1) {
+                return string;
+            } else {
+                return [
+                    string.substr(0, index),
+                    ...string.substr(index + this.value.length, string.length).split(this.value)
+                ];
+            }
+            
+        }
+    }
+    console.log('a,bdd,ch3,d,egd'.split(new MySplitter(',')));
 }
