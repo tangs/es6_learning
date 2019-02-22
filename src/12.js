@@ -27,3 +27,22 @@
     console.log(m);
     console.log(o);
 }
+
+{
+    const k = ['1'];
+    const m = new Map();
+    m.set('1', 3);
+    m.set(['1'], 12);
+    m.set(k, '2222');
+    console.log(m.get('1'));
+    console.log(m.get(['1']));
+    console.log(m.get(k));
+    console.log(m);
+    for (let [k, v] of m) {
+        console.log(k, v);
+    }
+    const arr = [...m];
+    for (let [k, v] of arr) {
+        console.log(k, v);
+    }
+}
