@@ -33,21 +33,31 @@
 }
 
 {
+    // new Promise((resolved, reject) => {
+    //     setTimeout(() => {
+    //         console.log('promise1 timeout.');
+    //         resolved(new Promise((resolved, reject) => {
+    //             setTimeout(() => {
+    //                 console.log('promise2 timeout.');
+    //                 resolved();
+    //             }, 1000)
+    //         }));
+    //     }, 1000);
+    // }).then(() => {
+    //     console.log("then1.")
+    // }).then(() => {
+    //     console.log("then2.")
+    // }).catch(() => {
+    //     console.log('catch.')
+    // });
+}
+
+{
     new Promise((resolved, reject) => {
+        resolved();
+        console.log('1');
         setTimeout(() => {
-            console.log('promise1 timeout.');
-            resolved(new Promise((resolved, reject) => {
-                setTimeout(() => {
-                    console.log('promise2 timeout.');
-                    resolved();
-                }, 1000)
-            }));
-        }, 1000);
-    }).then(() => {
-        console.log("then1.")
-    }).then(() => {
-        console.log("then2.")
-    }).catch(() => {
-        console.log('catch.')
-    });
+            console.log('2');
+        }, 0);
+    }).then((...pars) => console.log('call then.'));
 }
