@@ -54,10 +54,12 @@
 
 {
     new Promise((resolved, reject) => {
+        console.log('0');
         resolved();
         console.log('1');
         setTimeout(() => {
             console.log('2');
         }, 0);
     }).then((...pars) => console.log('call then.'));
+    console.log('3');
 }
