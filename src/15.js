@@ -65,21 +65,33 @@
 }
 
 {
-    const func1 = () => {
-        return new Promise((resolved, reject) => {
-            setTimeout(() => {
-                console.log('timeout.');
-                resolved();
-            }, 1000);
-        });
-    };
-    func1().then(() => {
-        console.log('1.');
-        return func1();
-    }).then(() => {
-        console.log('2.');
-        return func1();
-    }).then(() => {
-        console.log('3.');
-    });
+    // const func1 = () => {
+    //     return new Promise((resolved, reject) => {
+    //         setTimeout(() => {
+    //             console.log('timeout.');
+    //             resolved();
+    //         }, 1000);
+    //     });
+    // };
+    // func1().then(() => {
+    //     console.log('1.');
+    //     return func1();
+    // }).then(() => {
+    //     console.log('2.');
+    //     return func1();
+    // }).then(() => {
+    //     console.log('3.');
+    // });
+}
+
+{
+    new Promise((resolved, reject) => reject()
+    ).then(undefined, () => console.log('call then.')
+    ).catch(() => console.log('call catch.'));
+}
+
+{
+    new Promise((resolved, reject) => reject()
+    ).then(() => console.log('call then1.')
+    ).catch(() => console.log('call reject1.'));
 }
