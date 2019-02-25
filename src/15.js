@@ -53,13 +53,33 @@
 }
 
 {
-    new Promise((resolved, reject) => {
-        console.log('0');
-        resolved();
-        console.log('1');
-        setTimeout(() => {
-            console.log('2');
-        }, 0);
-    }).then((...pars) => console.log('call then.'));
-    console.log('3');
+    // new Promise((resolved, reject) => {
+    //     console.log('0');
+    //     resolved();
+    //     console.log('1');
+    //     setTimeout(() => {
+    //         console.log('2');
+    //     }, 0);
+    // }).then((...pars) => console.log('call then.'));
+    // console.log('3');
+}
+
+{
+    const func1 = () => {
+        return new Promise((resolved, reject) => {
+            setTimeout(() => {
+                console.log('timeout.');
+                resolved();
+            }, 1000);
+        });
+    };
+    func1().then(() => {
+        console.log('1.');
+        return func1();
+    }).then(() => {
+        console.log('2.');
+        return func1();
+    }).then(() => {
+        console.log('3.');
+    });
 }
