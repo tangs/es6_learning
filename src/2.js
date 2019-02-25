@@ -45,3 +45,20 @@
 }
 // var a = 33;
 // console.log(`a:${this.a}`);
+
+{
+    let i = 0;
+    for (i = 0; i < 10; ++i) {
+        setTimeout(() => {
+            console.log(`a:${i}`);
+        }, i + 500);
+    }
+}
+
+{
+    for (let i = 0; i < 10; ++i) {
+        setTimeout(() => {
+            console.log(`a:${i}`);
+        }, i + 500);
+    }
+}
