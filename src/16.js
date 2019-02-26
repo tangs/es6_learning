@@ -57,6 +57,12 @@
                     }
                 }
                 return ret;
+            },
+            return: () => {
+                console.log('call return().')
+                return {
+                    done: true
+                }
             }
         }
     };
@@ -66,5 +72,29 @@
     a.y = 50;
     for (let v of a) {
         console.log(v, a[v]);
+        // break;
+    }
+}
+
+{
+    class A {
+        *[Symbol.iterator]() {
+            for (let i = 0; i < 5; ++i)
+                yield i;
+        }
+    }
+    class B extends A {
+        *[Symbol.iterator]() {
+            for (let i = 0; i < 5; ++i)
+                yield i + 10;
+        }
+    }
+
+    const a = new B;
+    for (let v of a) {
+        console.log(v, typeof v);
+    }
+    for (let v in a) {
+        console.log(v);
     }
 }
