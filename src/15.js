@@ -124,19 +124,25 @@
 //     ).catch(() => console.log('reject.'));
 // }
 
+// {
+//     const p1 = new Promise((resovled, reject) => {
+//         setTimeout(() => {
+//             console.log('p1 timeout.');
+//             reject();
+//         }, 1000);
+//     });
+//     const p2 = new Promise((resovled, reject) => {
+//         setTimeout(() => {
+//             console.log('p2 timeout.');
+//             resovled();
+//         }, 2000);
+//     });
+//     Promise.race([p1, p2]).then(() => console.log('then')
+//     ).catch(() => console.log('reject.'));
+// }
+
 {
-    const p1 = new Promise((resovled, reject) => {
-        setTimeout(() => {
-            console.log('p1 timeout.');
-            reject();
-        }, 1000);
-    });
-    const p2 = new Promise((resovled, reject) => {
-        setTimeout(() => {
-            console.log('p2 timeout.');
-            resovled();
-        }, 2000);
-    });
-    Promise.race([p1, p2]).then(() => console.log('then')
-    ).catch(() => console.log('reject.'));
+    setTimeout(() => console.log(1));
+    Promise.resolve().then(() => console.log(2));
+    console.log(3);
 }
