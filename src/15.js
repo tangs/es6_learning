@@ -84,14 +84,59 @@
     // });
 }
 
-{
-    new Promise((resolved, reject) => reject()
-    ).then(undefined, () => console.log('call then.')
-    ).catch(() => console.log('call catch.'));
-}
+// {
+//     new Promise((resolved, reject) => reject()
+//     ).then(undefined, () => console.log('call then.')
+//     ).catch(() => console.log('call catch.'));
+// }
+
+// {
+//     new Promise((resolved, reject) => reject()
+//     ).then(() => console.log('call then1.')
+//     ).catch(() => console.log('call reject1.'));
+// }
+
+// {
+//     new Promise((resolved, reject) => {
+//         resolved();
+//         // reject();
+//         // resolved();
+//     }).then(() => {
+//         console.log('resolved.');
+//         throw new Error('err');
+//     }).catch(() => {
+//         console.log('reject.')
+//     }).finally(() => {
+//         console.log('finally.');
+//     });
+// }
+
+// {
+//     const promises = [1, 2, 3, 4, 5].map((number) => new Promise((resolved, reject) => {
+//         if (number === 5) {
+//             reject();
+//         } else {
+//             resolved();
+//         }
+//     }));
+//     promises[4] = promises[4].catch(() => console.log('reject1.'));
+//     Promise.all(promises).then(() => console.log('resovled.')
+//     ).catch(() => console.log('reject.'));
+// }
 
 {
-    new Promise((resolved, reject) => reject()
-    ).then(() => console.log('call then1.')
-    ).catch(() => console.log('call reject1.'));
+    const p1 = new Promise((resovled, reject) => {
+        setTimeout(() => {
+            console.log('p1 timeout.');
+            reject();
+        }, 1000);
+    });
+    const p2 = new Promise((resovled, reject) => {
+        setTimeout(() => {
+            console.log('p2 timeout.');
+            resovled();
+        }, 2000);
+    });
+    Promise.race([p1, p2]).then(() => console.log('then')
+    ).catch(() => console.log('reject.'));
 }
