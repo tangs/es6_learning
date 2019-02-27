@@ -1,5 +1,6 @@
 const fs = require('fs');
 const thunkify = require('thunkify');
+const co = require('co');
 // const readFile = require('fs-readfile-promise');
 
 {
@@ -75,18 +76,29 @@ const thunkify = require('thunkify');
 
 {
     const func = (...paras) => {
+        const dt = paras[0];
+        const callback = paras[paras.length - 1];
         setTimeout(() => {
             // console.log(paras[0]);
-            paras[paras.length - 1](null, paras[0]);
-        }, paras[0]);
+            if (dt === 3000) {
+                callback(dt);
+            } else {
+                callback(null, dt);
+            }
+        }, dt);
     };
 
     // const read = thunkify(fs.readFile);
     const read = thunkify(func);
     const gen = function* (paths) {
         for (let path of paths) {
-            yield read(path);
+            try {
+                yield read(path);
+            } catch (err) {
+                console.log('catch1:' + err);
+            }
         }
+        return true;
     };
     // const run = function(paths) {
     //     const fun = gen(paths);
@@ -130,4 +142,35 @@ const thunkify = require('thunkify');
     //     });
     //     console.log(2);
     // }
+
+//     co(gen, [100, 200, 300, 400]).then((data) => {
+//         console.log('data:' + data);
+//     }).catch((err) => {
+//         console.log('err:' + err);
+//     });
+    function run1(gen, ...paras) {
+        const g = gen(...paras)
+        function callback(err, data) {
+            if (err) {
+                console.log('err:' + err);
+            } else {
+                console.log('data:' + data);
+                next();
+            }
+        }
+        function next() {
+            const ret = g.next();
+            if (ret.done) {
+                return ret.value;
+            }
+            ret.value(callback);
+            // ret.value.then(callback);
+        }
+        next();
+    }
+    try {
+        run1(gen, [1000, 2000, 3000, 4000]);
+    } catch (err) {
+        console.log('catch:' + err);
+    }
 }
