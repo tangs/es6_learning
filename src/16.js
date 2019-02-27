@@ -90,11 +90,14 @@
         }
     }
 
-    const a = new B;
+    const a = new B();
     for (let v of a) {
         console.log(v, typeof v);
     }
     for (let v in a) {
         console.log(v);
     }
+    const b = new a.__proto__.constructor();
+    console.log(b instanceof B);
+    console.log(a.__proto__.constructor === B);
 }
