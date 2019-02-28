@@ -89,6 +89,7 @@ const fetch = require('node-fetch');
 {
     function func(b, time = 1000) {
         return new Promise((resolved, reject) => {
+            console.log('s:' + time);
             setTimeout(() => {
                 if (b) {
                     resolved('YES:' + time);
@@ -108,14 +109,38 @@ const fetch = require('node-fetch');
     }
 
     async function func2(arr) {
+        // console.log(1);
         const promises = arr.map(async (paras) => {
             return await func(...paras);
         });
+        // console.log(2);
         for (const promise of promises) {
             console.log(await promise);
         }
     }
 
     // func1();
-    func2([[true, 3000], [true, 2000], [true, 500]]);
+    // func2([[true, 3000], [true, 2000], [true, 500]]);
+}
+
+{
+    function func1(dt) {
+        return new Promise((resolved, reject) => {
+            setTimeout(() => {
+                resolved(dt);
+            }, dt);
+        });
+    }
+
+    async function* map(arr) {
+        for (const dt of arr) {
+            yield await func1(dt);
+        }
+    }
+    async function f(arr) {
+        for await(const ret of map(arr)) {
+            console.log(await ret);
+        }
+    }
+    f([4000, 3000, 1000, 5000]);
 }
