@@ -13,3 +13,7 @@
     console.log(p1);
     console.log(Point === p.constructor);
 }
+ 
+{
+    
+}

@@ -9,6 +9,7 @@
     "@babel/preset-env": "^7.0.0-0",
     "@babel/preset-react": "^7.0.0-0",
     "co": "^4.6.0",
+    "node-fetch": "^2.3.0",
     "thunkify": "^2.1.2"
   },
   "devDependencies": {

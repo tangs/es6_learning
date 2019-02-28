@@ -70,3 +70,55 @@
     func.apply(this, [1, 2, 3]);
     func.call(this, [1, 2, 3]);
 }
+
+{
+    let i = 0;
+    for (; i < 5; ++i) {
+        // setTimeout(() => console.log(i), 0);
+    }
+}
+
+{
+    for (let i = 0; i < 5; ++i) {
+        // setTimeout(() => console.log(i), 0);
+    }
+}
+
+{
+    const arr = [0, 1, 2, 3, 4];
+    for (const i of arr) {
+        // setTimeout(() => console.log(i), 0);
+    }
+}
+
+{
+    for (let i = 0; i < 5; ++i) {
+        setTimeout(() => {
+            // console.log(i);
+        }, 0);
+    }
+}
+
+{
+    let i = 0;
+    setTimeout(function() {
+        console.log(i);
+        // {
+        //     var i = 30;
+        // }
+    }, 100);
+    setTimeout(() => {
+        console.log(i);
+    }, 200);
+    {
+        let i = 453;
+    }
+}
+
+{
+    let i = 0;
+    {
+        i += 3;
+        // let i = 3;
+    }
+}

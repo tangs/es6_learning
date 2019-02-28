@@ -1,4 +1,5 @@
-const fs = require('fs')
+const fs = require('fs');
+const fetch = require('node-fetch');
 {
     const readFile = (path) => {
         return new Promise((resovled, reject) => {
@@ -37,9 +38,73 @@ const fs = require('fs')
             console.log(num);
         }
     };
-    gen([500, 1000, 2000, 4000]).then(() => {
-        console.log('end.');
-    }).catch(() => {
-        console.log('err.');
-    });
+    // gen([500, 1000, 2000, 4000]).then(() => {
+    //     console.log('end.');
+    // }).catch(() => {
+    //     console.log('err.');
+    // });
+}
+
+{
+    function logInOrder(urls) {
+        const textPromises = urls.map(url => {
+            return fetch(url).then(res => {
+                res.text();
+            });
+        });
+
+        textPromises.reduce((chain, textPromise) => {
+            return chain.then(() => textPromise)
+                .then((text) => {
+                    console.log(text)
+                });
+        }, Promise.resolve());
+    }
+    // logInOrder(['https://github.githubassets.com/assets/frameworks-b102e868.js']);
+}
+
+{
+    async function logInOrder(urls) {
+        for (const url of urls) {
+            const res = await fetch(url);
+            console.log((await res.text()).length);
+        }
+    }
+    // logInOrder(['https://github.githubassets.com/assets/frameworks-b102e868.js', 'http://www.baidu.com']);
+}
+
+{
+    async function logInOrder(urls) {
+        const promises = urls.map(async (url) => {
+            const res = await fetch(url);
+            return res.text();
+        });
+        for (const promise of promises) {
+            console.log((await promise).length);
+        }
+    }
+    // logInOrder(['http://hao123.com', 'http://www.baidu.com']);
+}
+
+{
+    function func(b) {
+        return new Promise((resolved, reject) => {
+            setTimeout(() => {
+                if (b) {
+                    resolved('YES.');
+                } else {
+                    reject('NO.');
+                }
+            }, 1000);
+        });
+    }
+    async function func1() {
+        console.log(await func(true));
+        try {
+            console.log(await func(false));
+        } catch (err) {
+            console.log('err:' + err);
+        }
+    }
+    func1();
 }
