@@ -87,24 +87,35 @@ const fetch = require('node-fetch');
 }
 
 {
-    function func(b) {
+    function func(b, time = 1000) {
         return new Promise((resolved, reject) => {
             setTimeout(() => {
                 if (b) {
-                    resolved('YES.');
+                    resolved('YES:' + time);
                 } else {
                     reject('NO.');
                 }
-            }, 1000);
+            }, time);
         });
     }
-    async function func1() {
-        console.log(await func(true));
+    async function func1(paras) {
+        console.log(await func(paras));
         try {
             console.log(await func(false));
         } catch (err) {
             console.log('err:' + err);
         }
     }
-    func1();
+
+    async function func2(arr) {
+        const promises = arr.map(async (paras) => {
+            return await func(...paras);
+        });
+        for (const promise of promises) {
+            console.log(await promise);
+        }
+    }
+
+    // func1();
+    func2([[true, 3000], [true, 2000], [true, 500]]);
 }
