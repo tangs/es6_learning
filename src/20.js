@@ -51,6 +51,7 @@
     class A {
         constructor() {
             console.log('A');
+            console.log('t:' + new.target.name);
         }
     }
     class B extends A {
@@ -60,5 +61,48 @@
         }
     }
 
-    new B();
+    const a = new B();
+    console.log(A.name);
+    // console.log(a.name);
+    console.log(Object.getPrototypeOf(B) === A);
+}
+
+{
+    class A {
+        constructor() {
+            this.a = 30;
+            this.b = 1;
+        }
+        func() {
+            console.log('call A.func().');
+        }
+        func1() {
+            console.log('call A.func1().');
+        }
+    };
+
+    class B extends A {
+        constructor() {
+            super();
+            this.b = 2;
+        }
+        func() {
+            console.log(this.a);
+            console.log(super.a);
+            this.func1();
+            super.func();
+        }
+        func2() {
+            console.log(this.b);
+            // console.log(super.b);
+        }
+    }
+
+    const b = new B();
+    b.func();
+    b.func2();
+    b.__proto__.__proto__.func10 = () => {
+        console.log('call func10().');
+    };
+    new A().func10();
 }
