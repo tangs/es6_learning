@@ -5,14 +5,14 @@
 {
     let hello = 123;
     // hell\u{6F} = 33;
-    // console.log(hello);
+    console.log(hello);
     // hello = 125;
     // console.log(hell\u{6F});
 }
 
 {
     const a = '𠮷a';
-    const len = a.length;
+    // const len = a.length;
     for (const ch of a) {
         console.log(typeof ch);
         console.log(ch, ch.codePointAt(0).toString(16).toUpperCase());
@@ -49,20 +49,21 @@
 }
 
 {
-    console.log(`line 1
-line 2.`)
+    const a = `line 1
+    line 2.`;
+    console.log(a);
 }
 
 {
-    const func = ({x, y = 33}) => {
+    const func = ({ x, y = 33 }) => {
         return x * y;
     };
-    console.log(`ret:${func({x: 40})}.`);
+    console.log(`ret:${func({ x: 40 })}.`);
 }
 
 {
     const tmp = addrs => `${addrs.map(addr => `${addr.x * addr.y}`)}`;
-    console.log(tmp([{x: 1, y: 2}, {x: 3, y: 4}, {x: 5, y: 6}]));
+    console.log(tmp([{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }]));
 }
 
 {
@@ -70,19 +71,17 @@ line 2.`)
     function compile(template) {
         const evalExpr = /<%=(.+?)%>/g;
         const expr = /<%([\s\S]+?)%>/g;
-        template = template
-        .replace(evalExpr, '`); \n echo($1); \n echo(`')
-        .replace(expr, '`); \n $1 \n echo(`');
-        template = `echo(\`${template}\`)`;
-        const script = 
-        `(function parse(data) {
+        let text = template.replace(evalExpr, '`); \n echo($1); \n echo(`')
+            .replace(expr, '`); \n $1 \n echo(`');
+        text = `echo(\`${template}\`)`;
+        const script = `(function parse(data) {
             let output = '';
 
             function echo(html) {
                 output += html;
             }
 
-            ${template}
+            ${text}
 
             return output;
         })`;
@@ -97,7 +96,7 @@ line 2.`)
     `;
     const script = compile(template);
     const parse = eval(script);
-    const txt = parse({supplies: ['tangs', 'kaka', 'Rivaldo', 'Ronaldo']});
+    const txt = parse({ supplies: ['tangs', 'kaka', 'Rivaldo', 'Ronaldo'] });
     console.log(txt);
 }
 
@@ -113,7 +112,7 @@ line 2.`)
     func`123`;
     const num = 100;
     func`${num}`;
-    func`Hello ${num} World ${num*num}`;
+    func`Hello ${num} World ${num * num}`;
 
     function passthru(literals) {
         let result = '';
@@ -138,15 +137,15 @@ line 2.`)
         return result;
     }
     // [['The total is ', ' (', ' with tax)'], 100, 105]
-    func`The total is ${num} (${num*1.05} with tax)`;
+    func`The total is ${num} (${num * 1.05} with tax)`;
     // literals: ['The total is ', ' (', ' with tax)']
     // arguments: [['The total is ', ' (', ' with tax)'], 100, 105]
     // msg: The total is 100 (105 with tax)
-    const msg = passthru`The total is ${num} (${num*1.05} with tax)`;
-    const msg1 = passthru1`The total is ${num} (${num*1.05} with tax)`;
+    const msg = passthru`The total is ${num} (${num * 1.05} with tax)`;
+    const msg1 = passthru1`The total is ${num} (${num * 1.05} with tax)`;
     console.log(msg);
     console.log(msg1);
-    console.log`123\n`
+    console.log`123\n`;
 }
 
 {
@@ -159,29 +158,29 @@ line 2.`)
 
 
     function func1() {
-        console.log('call func1.')
+        console.log('call func1.');
     }
     var func2 = function () {
-        console.log('call func2.')
-    }
+        console.log('call func2.');
+    };
     let func3 = function () {
-        console.log('call func3.')
-    }
+        console.log('call func3.');
+    };
     var func4 = () => {
-        console.log('call func4.')
-    }
+        console.log('call func4.');
+    };
     let func5 = () => {
-        console.log('call func5.')
-    }
+        console.log('call func5.');
+    };
 
     {
         func1();
         function func1() {
-            console.log('call func1.1')
+            console.log('call func1.1');
         }
         let func3 = function () {
-            console.log('call func3.1')
-        }
+            console.log('call func3.1');
+        };
         func3();
     }
     func1();
