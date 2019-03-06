@@ -27,6 +27,9 @@
     const b = new B(1, 2, 3);
     b.funcA();
     b.funcB();
+
+    const c = new b.constructor(3, 4, 5);
+    console.log(c instanceof B);
 }
 
 {
