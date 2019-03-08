@@ -1,6 +1,6 @@
 const fs = require('fs');
 const thunkify = require('thunkify');
-const co = require('co');
+// const co = require('co');
 // const readFile = require('fs-readfile-promise');
 
 {
@@ -143,13 +143,13 @@ const co = require('co');
     //     console.log(2);
     // }
 
-//     co(gen, [100, 200, 300, 400]).then((data) => {
-//         console.log('data:' + data);
-//     }).catch((err) => {
-//         console.log('err:' + err);
-//     });
+    //     co(gen, [100, 200, 300, 400]).then((data) => {
+    //         console.log('data:' + data);
+    //     }).catch((err) => {
+    //         console.log('err:' + err);
+    //     });
     function run1(gen, ...paras) {
-        const g = gen(...paras)
+        const g = gen(...paras);
         function callback(err, data) {
             if (err) {
                 console.log('err:' + err);
