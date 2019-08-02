@@ -14,9 +14,8 @@
     "thunkify": "^2.1.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.15.0",
+    "eslint": "^5.15.1",
     "eslint-config-alloy": "^1.4.2"
   }
 }
